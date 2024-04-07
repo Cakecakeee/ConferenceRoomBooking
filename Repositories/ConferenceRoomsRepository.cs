@@ -18,7 +18,7 @@ namespace ConferenceRoomBooking.Repositories
 
         public void CreateRoom(ConferenceRooms rooms)
         {
-            rooms.Add(rooms);
+            _context.ConferenceRooms.Add(rooms);
         }
 
         public ConferenceRooms GetRoomById(int id)
