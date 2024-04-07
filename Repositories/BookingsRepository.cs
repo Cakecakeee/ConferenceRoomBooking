@@ -98,30 +98,5 @@ namespace ConferenceRoomBooking.Repositories
         }
     }
 
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            BookingsRepository bookingsRepo = new BookingsRepository();
-
-            // Example usage
-            DateTime startDate = new DateTime(2024, 9, 1, 8, 0, 0);
-            DateTime endDate = new DateTime(2024, 9, 1, 10, 30, 0);
-            string roomId = "C001";
-            int numPeople = 15; // Assuming there are 15 people attending
-
-            Console.WriteLine(bookingsRepo.CreateBooking(startDate, endDate, roomId, numPeople));
-
-            // Example: View booking status
-            int bookingId = 1; // Assuming the booking ID is 1
-            Console.WriteLine(bookingsRepo.GetBookingStatus(bookingId));
-
-            // Example: View bookings for a selected date
-            DateTime selectedDate = new DateTime(2024, 9, 1);
-            List<Bookings> bookingsForDate = bookingsRepo.GetBookingsForDate(selectedDate);
-            foreach (var booking in bookingsForDate)
-
-                Console.WriteLine($"Booking ID: {booking.Id}, Room ID: {booking.RoomId}, Start Date: {booking.StartDate}, End Date: {booking.EndDate}, Status: {bookingsRepo.GetBookingStatus(booking.Id)}");
-        }
-    }
+    
 }
