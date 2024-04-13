@@ -32,12 +32,12 @@ namespace ConferenceRoomBooking.Controllers
                 }
             }
             [HttpPut]
-            public IActionResult UpdateSubscriptions(Subscription subscription)
+            public IActionResult UpdateReservationHolders(ReservationHolders reservationHolders)
             {
                 try
                 {
-                    _subscriptionsRepository.UpdateSubscription(subscription);
-                    return Ok("Subscription was updated succesfully.");
+                    _reservationHoldersRepository.Update(reservationHolders);
+                    return Ok("ReservationHolders was updated succesfully.");
                 }
                 catch (ArgumentException ex)
                 {
@@ -45,16 +45,16 @@ namespace ConferenceRoomBooking.Controllers
                 }
                 catch (Exception ex)
                 {
-                    return StatusCode(500, $"Failed to update subscription: {ex.Message}");
+                    return StatusCode(500, $"Failed to update ReservationHolders: {ex.Message}");
                 }
             }
             [HttpDelete]
-            public IActionResult SoftDeleteSubscriptions(int code)
+            public IActionResult SoftDeleteReservationHolders(int code)
             {
                 try
                 {
-                    _subscriptionsRepository.SoftDelete(code);
-                    return Ok("Subscription deleted succesfully.");
+                    _reservationHoldersRepository.DeleteSoft(code);
+                    return Ok("ReservationHolders deleted succesfully.");
                 }
                 catch (ArgumentException ex)
                 {
@@ -62,10 +62,26 @@ namespace ConferenceRoomBooking.Controllers
                 }
                 catch (Exception ex)
                 {
-                    return StatusCode(500, $"Failed to update subscription: {ex.Message}");
+                    return StatusCode(500, $"Failed to update ReservationHolders: {ex.Message}");
                 }
             }
-
+            [HttpDelete("ByHolder")]
+            public IActionResult DeleteReservationHolders( int bookingId)
+            {
+                try
+                {
+                    _reservationHoldersRepository.DeleteSoft(bookingId);
+                    return Ok("ReservationHolders deleted succesfully.");
+                }
+                catch (ArgumentException ex)
+                {
+                    return BadRequest(ex.Message);
+                }
+                catch (Exception ex)
+                {
+                    return StatusCode(500, $"Failed to delete ReservationHolders: {ex.Message}");
+                }
+            }
 
         }
     }
