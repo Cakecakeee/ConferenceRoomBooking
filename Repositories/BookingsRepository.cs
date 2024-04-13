@@ -10,6 +10,7 @@ namespace ConferenceRoomBooking.Repositories
             { "C001", 20 }, // Example room capacity
             { "C002", 15 },
             // Add more rooms and capacities as needed
+            //coment
         };
 
         public string CreateBooking(DateTime startDate, DateTime endDate, string roomId, int numPeople)
@@ -67,7 +68,7 @@ namespace ConferenceRoomBooking.Repositories
 
         public string SoftDeleteBooking(int id)
         {
-            Bookings booking = GetBookingById(id);
+             Bookings booking = GetBookingById(id);    
             if (booking != null)
             {
                 booking.IsDeleted = true;
@@ -98,7 +99,7 @@ namespace ConferenceRoomBooking.Repositories
         }
     }
 
-    class Program
+     public class Program
     {
         static void Main(string[] args)
         {
