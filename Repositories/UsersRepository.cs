@@ -10,6 +10,11 @@ namespace ConferenceRoomBooking.Repositories
         {
             _context = context;
         }
+
+        public UsersRepository()
+        {
+        }
+
         public void Add(Users user)
         {
             if (user == null)
