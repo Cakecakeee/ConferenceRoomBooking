@@ -10,6 +10,7 @@ namespace ConferenceRoomBooking.Repositories
             { "C001", 20 }, // Example room capacity
             { "C002", 15 },
             // Add more rooms and capacities as needed
+            //coment
         };
 
         public string CreateBooking(DateTime startDate, DateTime endDate, string roomId, int numPeople)
