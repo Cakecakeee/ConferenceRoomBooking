@@ -68,7 +68,7 @@ namespace ConferenceRoomBooking.Repositories
 
         public string SoftDeleteBooking(int id)
         {
-            Bookings booking = GetBookingById(id);
+             Bookings booking = GetBookingById(id);    
             if (booking != null)
             {
                 booking.IsDeleted = true;
