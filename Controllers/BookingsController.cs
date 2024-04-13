@@ -1,8 +1,6 @@
 ﻿using ConferenceRoomBooking.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using ConferenceRoomBooking.Models;
-
-
 namespace ConferenceRoomBooking.Controllers
 {
     public class BookingsController
@@ -91,5 +89,26 @@ namespace ConferenceRoomBooking.Controllers
             }
         }
     }
- 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
