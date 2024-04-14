@@ -1,5 +1,4 @@
 ﻿using ConferenceRoomBooking.Models;
-
 namespace ConferenceRoomBooking.Repositories
 {
     public class ConferenceRoomsRepository
@@ -9,31 +8,55 @@ namespace ConferenceRoomBooking.Repositories
         {
             _context = context;
         }
-            public void CreateRoom(ConferenceRooms room)
-            {
-                _context.ConferenceRooms.Add(room);
-            }
-            public ConferenceRooms GetRoomById(int id)
-            {
+        public void CreateRoom(ConferenceRooms room)
+        {
+            _context.ConferenceRooms.Add(room);
+        }
+        public ConferenceRooms GetRoomById(int id)
+        {
             return _context.ConferenceRooms.Find(id);
-            }
-            public ConferenceRooms GetRoomByCode(string code)
-            {
+        }
+        public List<ConferenceRooms> GetAll()
+        {
+            return _context.ConferenceRooms.ToList();
+        }
+        public ConferenceRooms GetRoomByCode(string code)
+        {
             return _context.ConferenceRooms.Find(code);
-            }
-            public void UpdateRoom(ConferenceRooms room)
+        }
+        public void UpdateRoom(ConferenceRooms room)
+        {
+            var exists = _context.ConferenceRooms.Find(room.Id);
+            if (exists != null)
             {
-                var exists = _context.ConferenceRooms.Find(room.Id);
-                if (exists!= null )
-                {
                 _context.ConferenceRooms.Update(room);
-                }
-            }
-            public void DeleteRoom(int id)
-            {
-            var room = _context.ConferenceRooms.Find(id);
-            _context.ConferenceRooms.Remove(room);
             }
         }
+        public void DeleteRoom(int id)
+        {
+            var room = _context.ConferenceRooms.Find(id);
+            _context.ConferenceRooms.Remove(room);
+        }
     }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

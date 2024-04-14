@@ -3,93 +3,91 @@ using Microsoft.AspNetCore.Mvc;
 using ConferenceRoomBooking.Models;
 namespace ConferenceRoomBooking.Controllers
 {
-    public class BookingsController
+    [ApiController]
+    [Route("api/Bookings")]
+    public class BookingController : ControllerBase
     {
-        [ApiController]
-        [Route("api/Bookings")]
-        public class BookingController : ControllerBase
+        private readonly BookingsRepository _bookingsRepository;
+        public BookingController(BookingsRepository bookingsRepository)
         {
-            private readonly BookingsRepository _bookingsRepository;
-            public BookingController(BookingsRepository bookingsRepository)
+            _bookingsRepository = bookingsRepository;
+        }
+        [HttpGet("All")]
+        public IActionResult GetAllBookings()
+        {
+            try
             {
-                _bookingsRepository = bookingsRepository;
+                IEnumerable<Bookings> bookings = _bookingsRepository.GetAllBookings();
+                return Ok(bookings);
             }
-            [HttpGet("All")]
-            public IActionResult GetAllBookings()
+            catch (Exception ex)
             {
-                try
-                {
-                    IEnumerable<Bookings> bookings = _bookingsRepository.GetAllBookings();
-                    return Ok(bookings);
-                }
-                catch (Exception ex)
-                {
-                    return BadRequest($"Failed to retrieve all bookings:{ex.Message}");
-                }
+                return BadRequest($"Failed to retrieve all bookings:{ex.Message}");
             }
-            [HttpGet("{id}")]
-            public IActionResult GetBookingById(int id)
+        }
+        [HttpGet("{id}")]
+        public IActionResult GetBookingById(int id)
+        {
+            try
             {
-                try
-                {
-                    var bookings = _bookingsRepository.GetBookingById(id);
-                    return Ok(bookings);
-                }
-                catch (Exception ex)
-                {
-                    return BadRequest($"Failed to get id:{ex.Message}");
-                }
+                var bookings = _bookingsRepository.GetBookingById(id);
+                return Ok(bookings);
             }
-            [HttpPost]
-            public IActionResult CreateBookings(Bookings booking)
+            catch (Exception ex)
             {
-                try
-                {
-                    _bookingsRepository.CreateBooking(booking);
-                    return Ok("Booking was created succesfully.");
-                }
-                catch (Exception ex)
-                {
-                    return BadRequest($"Failed to create booking: {ex.Message}");
-                }
+                return BadRequest($"Failed to get id:{ex.Message}");
             }
-            [HttpPut]
-            public IActionResult UpdateBookings(int id, bool isConfirmed)
+        }
+        [HttpPost]
+        public IActionResult CreateBookings(Bookings booking)
+        {
+            try
             {
-                try
-                {
-                    _bookingsRepository.UpdateBookingStatus(id, isConfirmed);
-                    return Ok("Booking was updated succesfully.");
-                }
-                catch (ArgumentException ex)
-                {
-                    return BadRequest(ex.Message);
-                }
-                catch (Exception ex)
-                {
-                    return StatusCode(500, $"Failed to update booking: {ex.Message}");
-                }
+                _bookingsRepository.CreateBooking(booking);
+                return Ok("Booking was created succesfully.");
             }
-            [HttpDelete]
-            public IActionResult SoftDeleteBookings(int code)
+            catch (Exception ex)
             {
-                try
-                {
-                    _bookingsRepository.SoftDeleteBooking(code);
-                    return Ok("Booking deleted succesfully.");
-                }
-                catch (ArgumentException ex)
-                {
-                    return BadRequest(ex.Message);
-                }
-                catch (Exception ex)
-                {
-                    return StatusCode(500, $"Failed to delete bookings: {ex.Message}");
-                }
+                return BadRequest($"Failed to create booking: {ex.Message}");
+            }
+        }
+        [HttpPut]
+        public IActionResult UpdateBookings(int id, bool isConfirmed)
+        {
+            try
+            {
+                _bookingsRepository.UpdateBookingStatus(id, isConfirmed);
+                return Ok("Booking was updated succesfully.");
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Failed to update booking: {ex.Message}");
+            }
+        }
+        [HttpDelete]
+        public IActionResult SoftDeleteBookings(int code)
+        {
+            try
+            {
+                _bookingsRepository.SoftDeleteBooking(code);
+                return Ok("Booking deleted succesfully.");
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Failed to delete bookings: {ex.Message}");
             }
         }
     }
 }
+
 
 
 
