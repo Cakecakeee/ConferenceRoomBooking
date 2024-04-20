@@ -1,4 +1,5 @@
-﻿using ConferenceRoomBooking.Models;
+﻿using ConferenceRoomBooking.Migrations;
+using ConferenceRoomBooking.Models;
 namespace ConferenceRoomBooking.Repositories
 {
     public class ConferenceRoomsRepository
@@ -11,6 +12,7 @@ namespace ConferenceRoomBooking.Repositories
         public void CreateRoom(ConferenceRooms room)
         {
             _context.ConferenceRooms.Add(room);
+            _context.SaveChanges();
         }
         public ConferenceRooms GetRoomById(int id)
         {
@@ -31,11 +33,13 @@ namespace ConferenceRoomBooking.Repositories
             {
                 _context.ConferenceRooms.Update(room);
             }
+            _context.SaveChanges();
         }
         public void DeleteRoom(int id)
         {
             var room = _context.ConferenceRooms.Find(id);
             _context.ConferenceRooms.Remove(room);
+            _context.SaveChanges();
         }
     }
 }
