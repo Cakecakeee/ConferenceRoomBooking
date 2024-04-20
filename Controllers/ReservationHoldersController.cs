@@ -4,8 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ConferenceRoomBooking.Controllers
 {
-    public class ReservationHoldersController
-    {
+    
+    
 
         [ApiController]
         [Route("api/ReservationHolders")]
@@ -85,5 +85,5 @@ namespace ConferenceRoomBooking.Controllers
 
         }
     }
-}
+
 

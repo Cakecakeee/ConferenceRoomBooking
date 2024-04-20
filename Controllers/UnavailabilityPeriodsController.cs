@@ -4,8 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ConferenceRoomBooking.Controllers
 {
-    public class UnavailabilityPeriodsController
-    {
+   
         [ApiController]
         [Route("api/UnavailabilityPeriods")]
         public class UnavailabilityPeriodsControllers : ControllerBase
@@ -66,4 +65,4 @@ namespace ConferenceRoomBooking.Controllers
 
         }
     }
-}
+
